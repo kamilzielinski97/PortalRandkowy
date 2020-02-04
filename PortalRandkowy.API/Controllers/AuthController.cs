@@ -7,7 +7,7 @@ using PortalRandkowy.API.Models;
 namespace PortalRandkowy.API.Controllers
 {
     [Route("api/[controller]")]
-   // [ApiController]
+    [ApiController]
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository _repository;
@@ -17,7 +17,7 @@ namespace PortalRandkowy.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody]UserForRegisterDto userForRegisterDto)
+        public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
 
