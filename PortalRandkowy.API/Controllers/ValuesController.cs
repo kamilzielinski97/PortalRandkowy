@@ -20,11 +20,11 @@ namespace PortalRandkowy.API.Controllers
 
         public ValuesController(DataContext context)
         {
-            this._context = context;
-
+            _context = context;
         }
 
         // GET api/values
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetValues()
         {
