@@ -3,6 +3,9 @@ import { User } from 'src/app/_models/user';
 import { ActivatedRoute } from '@angular/router';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { NgForm } from '@angular/forms';
+import { AuthService } from 'src/app/_services/auth.service';
+import { UserService } from 'src/app/_services/user.service';
+import { error } from 'util';
 
 @Component({
   selector: 'app-user-edit',
@@ -20,7 +23,10 @@ export class UserEditComponent implements OnInit {
     }
   }
 
-  constructor(private route: ActivatedRoute, private alertify: AlertifyService) { }
+  constructor(private route: ActivatedRoute,
+              private alertify: AlertifyService,
+              private userService: UserService,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -29,8 +35,14 @@ export class UserEditComponent implements OnInit {
   }
 
   updateUser() {
-    console.log(this.user);
-    this.alertify.success('Profil pomyślnie zaktualizowany');
-    this.editForm.reset(this.user);
+
+    this.userService.updateUser(this.authService.decoderToken.nameid, this.user)
+    .subscribe(next => {
+      this.alertify.success('Profil pomyślnie zaktualizowano');
+      this.editForm.reset(this.user);
+    // tslint:disable-next-line: no-shadowed-variable
+    }, error => {
+      this.alertify.error(error);
+    });
   }
 }
