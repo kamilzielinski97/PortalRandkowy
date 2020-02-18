@@ -17,7 +17,7 @@ export class NavComponent implements OnInit {
   ngOnInit() {
   }
 
-  login(){
+  login() {
     this.authService.login(this.model).subscribe(next => {
       this.alertify.success('Zalogowales sie do aplikacji');
     }, error => {
@@ -27,12 +27,15 @@ export class NavComponent implements OnInit {
     });
   }
 
-  loggedIn(){
+  loggedIn() {
     return this.authService.loggedIn();
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.authService.decoderToken = null;
+    this.authService.currentUser = null;
     this.alertify.message('Zostałeś wylogowany');
     this.router.navigate(['/home']);
   }
