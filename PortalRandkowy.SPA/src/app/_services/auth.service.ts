@@ -4,6 +4,8 @@ import { map } from 'rxjs/operators';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
+import { BehaviorSubject } from 'rxjs';
+import { from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +16,17 @@ export class AuthService {
   jwtHelper = new JwtHelperService();
   decoderToken: any;
   currentUser: User;
+  photoUrl = new BehaviorSubject<string>('../../assets/user.png');
+  currentPhotoUrl = this.photoUrl.asObservable();
 
 constructor(private http: HttpClient) { }
 
-login(model: any){
+
+ changeUserPhoto(photoUrl: string) {
+   this.photoUrl.next(photoUrl);
+ }
+
+login(model: any) {
   return this.http.post(this.baseUrl + 'login', model)
     .pipe(map((response: any) => {
       const user = response;
@@ -26,7 +35,7 @@ login(model: any){
         localStorage.setItem('user', JSON.stringify(user.user));
         this.decoderToken = this.jwtHelper.decodeToken(user.token);
         this.currentUser = user.user;
-        console.log(this.decoderToken);
+        this.changeUserPhoto(this.currentUser.photoUrl);
       }
     }));
 }
