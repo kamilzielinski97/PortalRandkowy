@@ -33,6 +33,7 @@ import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { PreventUnsavesChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotosComponent } from './users/usere-list/photos/photos.component';
 import { from } from 'rxjs';
+import { TimeAgoPipe } from './_pipes/time-ago-pipe';
 
 
 export function tokenGetter() {
@@ -51,7 +52,8 @@ export function tokenGetter() {
       UserCardComponent,
       UserDetailComponent,
       UserEditComponent,
-      PhotosComponent
+      PhotosComponent,
+      TimeAgoPipe
    ],
    imports: [
       BrowserModule,
