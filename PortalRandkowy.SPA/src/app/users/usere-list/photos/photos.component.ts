@@ -49,7 +49,7 @@ export class PhotosComponent implements OnInit {
     this.uploader.onAfterAddingFile = (file) => { file.withCredentials =  false; };
 
     this.uploader.onSuccessItem = (item, response, status, headers) => {
-      if(response){
+      if (response) {
         const res: Photo = JSON.parse(response);
         const photo = {
           id: res.id,
@@ -74,6 +74,17 @@ export class PhotosComponent implements OnInit {
       localStorage.setItem('user', JSON.stringify(this.authService.currentUser));
     }, error => {
       this.alertify.error(error);
+    });
+  }
+
+  deletePhoto(id: number) {
+    this.alertify.confirm('Czy jesteś pewien że chcesz usunąć zdjecie?', () => {
+      this.userService.deletePhoto(this.authService.decoderToken.nameid, id).subscribe(() => {
+        this.photos.splice(this.photos.findIndex(p => p.id === id), 1);
+        this.alertify.success('Zdjecie zostalo usuniete');
+      }, error => {
+        this.alertify.error('Nie udało sie usunąć zdjecia');
+      });
     });
   }
 }
