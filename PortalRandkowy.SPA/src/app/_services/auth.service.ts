@@ -30,7 +30,7 @@ login(model: any) {
   return this.http.post(this.baseUrl + 'login', model)
     .pipe(map((response: any) => {
       const user = response;
-      if(user){
+      if (user) {
         localStorage.setItem('token', user.token);
         localStorage.setItem('user', JSON.stringify(user.user));
         this.decoderToken = this.jwtHelper.decodeToken(user.token);
@@ -40,11 +40,11 @@ login(model: any) {
     }));
 }
 
-  register(model: any){
-    return this.http.post(this.baseUrl + 'register', model);
+  register(user: User) {
+    return this.http.post(this.baseUrl + 'register', user);
   }
 
-  loggedIn(){
+  loggedIn() {
     const token = localStorage.getItem('token');
     return !this.jwtHelper.isTokenExpired(token);
   }
