@@ -10,7 +10,7 @@ import { catchError } from 'rxjs/operators';
 export class UserListResolver implements Resolve<User[]> {
 
     pageNumber = 1;
-    pageSize = 36;
+    pageSize = 12;
 
 
     constructor(private userService: UserService,
@@ -19,7 +19,7 @@ export class UserListResolver implements Resolve<User[]> {
 
     resolve(route: ActivatedRouteSnapshot): Observable<User[]> {
         return this.userService.getUsers(this.pageNumber, this.pageSize).pipe(
-            catchError(Error => {
+            catchError(error => {
                 this.alertify.error('Problem z pobraniem danych');
                 this.router.navigate(['']);
                 return of(null);
