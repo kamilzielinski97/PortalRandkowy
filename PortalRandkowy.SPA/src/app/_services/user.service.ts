@@ -30,6 +30,7 @@ constructor(private http: HttpClient) { }
       params = params.append('maxAge', userParams.maxAge);
       params = params.append('gender', userParams.gender);
       params = params.append('zodiacSign', userParams.zodiacSign);
+      params = params.append('OrderBy', userParams.OrderBy);
     }
 
     return this.http.get<User[]>(this.baseUrl + 'users', { observe: 'response', params})

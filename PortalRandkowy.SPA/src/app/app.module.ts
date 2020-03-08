@@ -11,6 +11,7 @@ import { NgxGalleryModule } from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -77,6 +78,7 @@ export function tokenGetter() {
       PaginationModule.forRoot(),
       BrowserAnimationsModule,
       TabsModule.forRoot(),
+      ButtonsModule.forRoot(),
       NgxGalleryModule
    ],
    providers: [
