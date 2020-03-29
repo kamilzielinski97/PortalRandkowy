@@ -50,7 +50,7 @@ namespace PortalRandkowy.API.Controllers {
             var messagesToReturn = _mapper.Map<IEnumerable<MessageToReturnDto>>(messagesFromRepo);
 
             Response.AddPagination(messagesFromRepo.CurrentPage, messagesFromRepo.PageSize,
-                                   messagesFromRepo.TotalCount, messagesFromRepo.TotalPages);
+                                    messagesFromRepo.TotalCount, messagesFromRepo.TotalPages);
 
             return Ok(messagesToReturn);
         }
