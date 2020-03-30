@@ -37,6 +37,7 @@ import { PhotosComponent } from './users/usere-list/photos/photos.component';
 import { from } from 'rxjs';
 import { TimeAgoPipe } from './_pipes/time-ago-pipe';
 import { LikesResolver } from './_resolvers/likes.resolver';
+import { MessagesResolver } from './_resolvers/messages.resolver';
 
 
 export function tokenGetter() {
@@ -92,7 +93,8 @@ export function tokenGetter() {
        UserListResolver,
        UserEditResolver,
        PreventUnsavesChanges,
-       LikesResolver
+       LikesResolver,
+       MessagesResolver
    ],
    bootstrap: [
       AppComponent
