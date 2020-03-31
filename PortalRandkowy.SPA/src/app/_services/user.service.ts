@@ -75,7 +75,9 @@ constructor(private http: HttpClient) { }
   sendLike(id: number, recipientId: number) {
     return this.http.post(this.baseUrl + 'users/' + id + '/like/' + recipientId, {});
   }
+
   getMessages(id: number, page?, itemsPerPage?, messageContainer?) {
+
     const paginationResult: PaginationResult<Message[]> = new PaginationResult<Message[]>();
     let params = new HttpParams();
 
@@ -98,5 +100,9 @@ constructor(private http: HttpClient) { }
         return paginationResult;
       })
     );
+  }
+
+  getMessageThread(id: number, recipientId: number) {
+    return this.http.get<Message[]>(this.baseUrl + 'users/' + id + '/messages/thread/' + recipientId);
   }
 }

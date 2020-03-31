@@ -38,6 +38,7 @@ import { from } from 'rxjs';
 import { TimeAgoPipe } from './_pipes/time-ago-pipe';
 import { LikesResolver } from './_resolvers/likes.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
+import { UserMessagesComponent } from './users/usere-list/user-messages/user-messages.component';
 
 
 export function tokenGetter() {
@@ -57,7 +58,8 @@ export function tokenGetter() {
       UserDetailComponent,
       UserEditComponent,
       PhotosComponent,
-      TimeAgoPipe
+      TimeAgoPipe,
+      UserMessagesComponent
    ],
    imports: [
       BrowserModule,
