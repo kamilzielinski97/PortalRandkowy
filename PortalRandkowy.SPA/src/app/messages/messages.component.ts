@@ -16,6 +16,7 @@ export class MessagesComponent implements OnInit {
   messages: Message[];
   pagination: Pagination;
   messageContainer = 'Nieprzeczytane';
+  flagaOutbox = false;
 
   constructor(private userService: UserService,
               private authService: AuthService,
@@ -31,12 +32,29 @@ export class MessagesComponent implements OnInit {
 
   loadMessages() {
     this.userService.getMessages(this.authService.decoderToken.nameid, this.pagination.currentPage,
-                                  this.pagination.itemsPerPage, this.messages)
+                                  this.pagination.itemsPerPage, this.messageContainer)
     .subscribe((res: PaginationResult<Message[]>) => {
       this.messages = res.result;
       this.pagination = res.pagination;
+
+      if (res.result[0].messageContainer === 'Outbox') {
+        this.flagaOutbox = true;
+      } else {
+        this.flagaOutbox = false;
+      }
     }, error => {
       this.alertify.error(error);
+    });
+  }
+
+  deleteMessage(id: number) {
+    this.alertify.confirm('Czy na pewno chcesz usunąć tę wiadomość?', () => {
+      this.userService.deleteMessage(id, this.authService.decoderToken.nameid).subscribe(() => {
+        this.messages.splice(this.messages.findIndex(m => m.id === id), 1);
+        this.alertify.success('Wiadomość została usunięta');
+      }, error => {
+        this.alertify.error('Nie udało się usunąć wiadomości');
+      });
     });
   }
 
