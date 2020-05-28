@@ -10,6 +10,9 @@
 ## Screenshots
 ![Example screenshot](./img/screenshot.png)
 
+
+
+
 ## Technologies
 * ngx-bootstrap
 * Angular version 8 
