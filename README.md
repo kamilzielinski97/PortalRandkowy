@@ -25,4 +25,5 @@ Project is: in progress.
 My inspiration was creating a messenger for students and development in .net websites
 
 ## Contact
-Kamil Zieliński zielak0701@gmail.com
+Kamil Zieliński
+zielak0701@gmail.com
